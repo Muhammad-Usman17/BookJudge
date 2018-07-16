@@ -1,36 +1,23 @@
 //  libs
 import React, { Component } from 'react';
-import { connect } from '../../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-redux';
-import getOr from '../../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/lodash/fp/getOr';
-
+import { connect } from 'react-redux';
+import { getOr } from 'lodash/fp';
 
 class BookView extends Component {
   constructor(props) {
     super(props);
-   
   }
 
-  componentDidUpdate(prevProps) {
-   
-  }
+  componentDidUpdate(prevProps) {}
 
-  componentDidMount() {
-   
-  }
+  componentDidMount() {}
 
   render() {
-   
-    return (
-     
-    );
+    return <div />;
   }
 }
 
 function mapStateToProps(state) {
-
-
-  return {
-    
-  };
+  return {};
 }
 export default connect(mapStateToProps)(BookView);

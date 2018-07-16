@@ -5,23 +5,25 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 //  src
-import history from './utils/history';
+import history from '../src/utils/history';
 import configureStore from './redux/store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
-import Home from './components/Home';
+import AutoSuggest from './components/AutoSuggest';
 import Search from './components/Search';
 import BookView from './components/BookView';
+import Header from './components/Header';
 
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
     <div>
+      <Header />
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={AutoSuggest} />
           <Route exact path="/search/:query" component={Search} />
-          <Route path="/book/:id" component={BookView} />
+          <Route exact path="/book/:id" component={BookView} />
           <Redirect to="/" />
         </Switch>
       </Router>

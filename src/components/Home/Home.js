@@ -1,36 +1,21 @@
 //  libs
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOr } from '/lodash/fp';
+import { getOr } from 'lodash/fp';
 
+//  src
+import Header from '../Header';
+import AutoSuggest from '../AutoSuggest';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-   
-  }
-
-  componentDidUpdate(prevProps) {
-   
-  }
-
-  componentDidMount() {
-   
-  }
+  componentDidMount() {}
 
   render() {
-   
-    return (
-     
-    );
+    return <div />;
   }
 }
 
 function mapStateToProps(state) {
-
-
-  return {
-    
-  };
+  return {};
 }
 export default connect(mapStateToProps)(Home);

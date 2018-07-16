@@ -4,8 +4,10 @@ import * as xmlParse from 'xml2js';
 //  src
 import * as config from '../Config.json';
 
-class SearchApi {
+class search {
   static getAllBooks(query, page) {
+    console.log('api query', query);
+    console.log('page', page);
     let source = axios.CancelToken.source();
     source.cancel('Canceled previous Request');
     source = axios.CancelToken.source();
@@ -22,10 +24,10 @@ class SearchApi {
           books = result.GoodreadsResponse.search;
         });
         books[0].page = page;
+        console.log(books);
         return books;
       })
       .catch(error => error);
   }
 }
-
-export default SearchApi;
+export default search;

@@ -1,0 +1,21 @@
+.Header-root {
+  flex-grow: 1;
+}
+.Header-root-hide {
+  display: none !important;
+}
+
+.Header-flex {
+  flex: 2;
+}
+
+.Header-Button {
+  color: white !important;
+}
+
+.Header-Name {
+  margin-right: 15px;
+  margin-left: 3px;
+  font-size: 20px;
+  font-family: "Courier New";
+}
