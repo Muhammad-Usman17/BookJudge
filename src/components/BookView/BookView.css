@@ -1,0 +1,23 @@
+.Book-image {
+  min-height: 200px;
+  background-repeat: no-repeat !important;
+  background-size: auto !important;
+}
+.Book-card {
+  min-width: 800px;
+  min-height: 400px;
+  margin: 30px;
+}
+.Book-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around !important;
+  flex-wrap: wrap;
+  background-color: whitesmoke;
+}
+.Book-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  flex-wrap: wrap;
+}

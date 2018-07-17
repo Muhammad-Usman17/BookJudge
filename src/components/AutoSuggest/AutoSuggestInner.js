@@ -2,6 +2,12 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+
+//  src
+import './AutoSuggest.css';
 
 const AutoSuggestInner = props => {
   const {
@@ -18,25 +24,36 @@ const AutoSuggestInner = props => {
     onClickSearch,
   } = props;
   return (
-    <div>
-      <Autosuggest
-        renderInputComponent={renderInput}
-        suggestions={books}
-        onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        onSuggestionSelected={onSuggestionSelected}
-        renderSuggestion={renderSuggestion}
-        getSuggestionValue={getSuggestionValue}
-        inputProps={{
-          placeholder: 'Search Book',
-          value,
-          onChange: handleChange,
-        }}
-      />
+    <Card>
+      <CardContent className="AutoSuggest-content">
+        <div className="AutoSuggest-autocomplete">
+          <Autosuggest
+            renderInputComponent={renderInput}
+            suggestions={books}
+            onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
+            onSuggestionsClearRequested={handleSuggestionsClearRequested}
+            renderSuggestionsContainer={renderSuggestionsContainer}
+            onSuggestionSelected={onSuggestionSelected}
+            renderSuggestion={renderSuggestion}
+            getSuggestionValue={getSuggestionValue}
+            inputProps={{
+              placeholder: 'Book Name',
+              value,
+              onChange: handleChange,
+            }}
+          />
+        </div>
 
-      <Button onClick={onClickSearch}> Search </Button>
-    </div>
+        <Button
+          className="AutoSuggest-button"
+          variant="outlined"
+          color="secondary"
+          onClick={onClickSearch}
+        >
+          {' '}Search{' '}
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 

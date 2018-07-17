@@ -16,7 +16,7 @@ export default function books(state = {}, action) {
             title: bestBook.title[0],
             author: bestBook.author[0].name[0],
             image: bestBook.image_url[0],
-            averageRating: book.average_rating[0],
+            averageRating: parseFloat(book.average_rating[0]),
             ratingCount: book.ratings_count[0]._,
           };
         });

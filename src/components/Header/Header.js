@@ -14,7 +14,7 @@ const Header = props =>
     <AppBar position="static">
       <Toolbar>
         <div className="Header-flex">
-          <Typography variant="title" color="inherit">
+          <Typography variant="title" color="inherit" className="Header-Name">
             Book Judge
           </Typography>
           <Button

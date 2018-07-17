@@ -2,16 +2,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getOr } from 'lodash/fp';
-import InfiniteScroll from 'react-infinite-scroller';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 //  src
 import history from '../../utils/history';
 import { loadBooks, PaginateBooks } from '../../redux/actions';
+import SearchInner from './SearchInner';
 
 class Search extends Component {
   constructor(props) {
@@ -33,9 +28,9 @@ class Search extends Component {
     dispatch(loadBooks(query, 1));
   }
 
-  handleItemClick(i) {
-    history.push(`/book/${i}`);
-  }
+  handleItemClick = id => {
+    history.push(`/book/${id}`);
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.searchResults !== this.props.searchResults) {
@@ -59,36 +54,14 @@ class Search extends Component {
   };
 
   render() {
-    const { books, totalResults, page, totalPages } = this.state;
-    const loader = <CircularProgress />;
-
-    const items = [];
-
-    books.map((book, i) => {
-      items.push(
-        <ListItem
-          button
-          onClick={() => {
-            this.handleItemClick(book.id);
-          }}
-        >
-          <Avatar src={book.image} />
-          <ListItemText primary={book.title} secondary={book.author} />
-        </ListItem>
-      );
-    });
-
+    const { books, totalResults, hasMoreItems } = this.state;
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.handleLoadMore}
-        hasMore={!this.state.hasMoreItems}
-        loader={loader}
-      >
-        <div>
-          {items}
-        </div>
-      </InfiniteScroll>
+      <SearchInner
+        books={books}
+        totalResults={totalResults}
+        handleLoadMore={this.handleLoadMore}
+        hasMoreItems={hasMoreItems}
+      />
     );
   }
 }

@@ -6,8 +6,6 @@ import * as config from '../Config.json';
 
 class search {
   static getAllBooks(query, page) {
-    console.log('api query', query);
-    console.log('page', page);
     let source = axios.CancelToken.source();
     source.cancel('Canceled previous Request');
     source = axios.CancelToken.source();
@@ -24,7 +22,6 @@ class search {
           books = result.GoodreadsResponse.search;
         });
         books[0].page = page;
-        console.log(books);
         return books;
       })
       .catch(error => error);
