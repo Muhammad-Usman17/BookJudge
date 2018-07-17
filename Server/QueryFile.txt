@@ -1,0 +1,18 @@
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."bittrexBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."bittrexBalanceHourwises"."currencyName")
+
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."poloniexBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."poloniexBalanceHourwises"."currencyName")
+
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."binanceBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."binanceBalanceHourwises"."currencyName")
+
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."liquiBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."liquiBalanceHourwises"."currencyName")
+
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."krakenBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."krakenBalanceHourwises"."currencyName")
+
+
+INSERT INTO public."currencyExchangeRateHourWise"("currencyName", "exchangeRate" , "createdAt") SELECT  "currencyName" , case  when ("totalUnit"::double precision) = 0 then 0  else (("totalBalance"::double precision)/ ("totalUnit"::double precision))::double precision end , "createdAt" FROM public."kucoinBalanceHourwises"where "createdAt" Not In(Select "createdAt" from public."currencyExchangeRateHourWise" where "currencyName"= public."kucoinBalanceHourwises"."currencyName")
+

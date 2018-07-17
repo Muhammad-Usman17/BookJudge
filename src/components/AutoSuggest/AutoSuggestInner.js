@@ -25,6 +25,7 @@ const AutoSuggestInner = props => {
   } = props;
   return (
     <Card>
+      <CardMedia image="../../images/Books.jpg" />
       <CardContent className="AutoSuggest-content">
         <div className="AutoSuggest-autocomplete">
           <Autosuggest

@@ -56,12 +56,17 @@ class Search extends Component {
   render() {
     const { books, totalResults, hasMoreItems } = this.state;
     return (
-      <SearchInner
-        books={books}
-        totalResults={totalResults}
-        handleLoadMore={this.handleLoadMore}
-        hasMoreItems={hasMoreItems}
-      />
+      <div>
+        <p>
+          {totalResults} results founded.
+        </p>
+        <SearchInner
+          books={books}
+          totalResults={totalResults}
+          handleLoadMore={this.handleLoadMore}
+          hasMoreItems={hasMoreItems}
+        />
+      </div>
     );
   }
 }

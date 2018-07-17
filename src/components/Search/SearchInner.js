@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchListItem from '../SearchListItem';
 
 const SearchInner = props => {
-  const { books, totalResults, handleLoadMore, hasMoreItems } = props;
+  const { books, handleLoadMore, hasMoreItems } = props;
   const loader = <CircularProgress />;
   const items = [];
 

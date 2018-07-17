@@ -6,11 +6,7 @@ export const LOAD_BOOKS_SUCCESS = 'LOAD_BOOKS_SUCCESS';
 export const LOAD_BOOKS_FAILURE = 'LOAD_BOOKS_FAILURE';
 
 export function loadBooks(query, page) {
-  console.log('query', query);
-  console.log('page', page);
-  return function(dispatch) {
-    console.log('inner query', query);
-    console.log('page', page);
+  return dispatch => {
     dispatch({ type: LOAD_BOOKS });
     return bookApi
       .getAllBooks(query, page)
