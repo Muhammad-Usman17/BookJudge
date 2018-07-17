@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-const fetch = require('node-fetch');
 
 const xmlParse = require('xml2js');
 const url = require('url');
+const cors = require('cors');
 
 const config = require('./Config.json');
 
@@ -11,6 +11,7 @@ const app = express();
 const router = express.Router();
 const port = 4000;
 
+app.use(cors());
 // all routes prefixed with /api
 app.use('/api', router);
 
@@ -30,7 +31,8 @@ router.get('/books', async (request, response) => {
         book = result.GoodreadsResponse.search;
       });
       book[0].page = page;
-      response.json({ book });
+      // response.json(book);
+      response.send({ book });
       return book;
     })
     .catch(error => {
@@ -52,7 +54,9 @@ const getBooks = (query, page) => {
     return axios.get(
       `${config.baseUrl}search/index.xml?key=${config.apiKey}&q=
 				 ${query}&search[field]=title&page=${page}`,
-      con
+      {
+        'Access-Control-Allow-Origin': '*',
+      }
     );
   } catch (error) {
     console.error(error);
