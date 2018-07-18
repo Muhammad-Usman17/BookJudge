@@ -1,22 +1,32 @@
+//  lib
 const express = require('express');
 const axios = require('axios');
-
 const xmlParse = require('xml2js');
 const url = require('url');
 const cors = require('cors');
 
+//  src
 const config = require('./Config.json');
 
 const app = express();
 const router = express.Router();
 const port = 4000;
-
 app.use(cors());
-// all routes prefixed with /api
 app.use('/api', router);
 
-// using router.get() to prefix our path
-// url: http://localhost:3000/api/
+const getBooks = (query, page) => {
+  try {
+    return axios.get(
+      `${config.baseUrl}search/index.xml?key=${config.apiKey}&q=
+				 ${query}&search[field]=title&page=${page}`,
+      {
+        'Access-Control-Allow-Origin': '*',
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 router.get('/books', async (request, response) => {
   const urlParts = url.parse(request.url, true);
@@ -39,28 +49,5 @@ router.get('/books', async (request, response) => {
       console.log(error);
     });
 });
-
-const getBooks = (query, page) => {
-  let source = axios.CancelToken.source();
-  source.cancel('Canceled previous Request');
-  source = axios.CancelToken.source();
-  const con = {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-    cancelToken: source.token,
-  };
-  try {
-    return axios.get(
-      `${config.baseUrl}search/index.xml?key=${config.apiKey}&q=
-				 ${query}&search[field]=title&page=${page}`,
-      {
-        'Access-Control-Allow-Origin': '*',
-      }
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

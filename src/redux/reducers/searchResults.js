@@ -2,9 +2,10 @@
 import * as actionTypes from '../actions';
 
 export default function searchResults(state = {}, action) {
-  const { type, payload, intent } = action;
+  const { type, payload, meta } = action;
   switch (type) {
     case actionTypes.LOAD_BOOKS_SUCCESS: {
+      const { paginate } = meta;
       const query = payload[0].query[0];
       const totalResults = payload[0]['total-results'][0];
       const page = payload[0].page;
@@ -13,7 +14,7 @@ export default function searchResults(state = {}, action) {
         totalResults > 0
           ? payload[0].results[0].work.map(book => book.best_book[0].id[0]._)
           : state;
-      const items = intent === 'NEW' ? bookArray : [...state.items, ...bookArray];
+      const items = !paginate ? bookArray : [...state.items, ...bookArray];
       const nextState = {
         query,
         items,

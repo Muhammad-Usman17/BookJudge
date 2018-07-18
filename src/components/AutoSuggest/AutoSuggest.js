@@ -1,9 +1,11 @@
+// lib
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import debounce from 'lodash/debounce';
 import { connect } from 'react-redux';
+import { getOr } from 'lodash/fp';
 
 //  src
 import { loadBooks } from '../../redux/actions';
@@ -120,11 +122,11 @@ class AutoSuggest extends React.Component {
   // handle search button click
   handleClick = event => {
     const { value } = this.state;
-
     if (value.length > 0) {
       history.push(`/search/${value}`);
     }
   };
+
   render() {
     const { books, value } = this.state;
     return (
@@ -146,10 +148,11 @@ class AutoSuggest extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
+  const searchResults = getOr({}, 'searchResults')(state);
+  const books = getOr({}, 'books')(state);
   return {
-    searchResults: state.searchResults,
-    books: state.books,
+    searchResults,
+    books,
   };
 }
 export default connect(mapStateToProps)(AutoSuggest);

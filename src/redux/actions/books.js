@@ -14,7 +14,7 @@ export function loadBooks(query, page) {
         dispatch({
           type: LOAD_BOOKS_SUCCESS,
           payload: books,
-          intent: 'NEW',
+          meta: { paginate: false },
         });
       })
       .catch(error => {
@@ -36,7 +36,7 @@ export function PaginateBooks(query, page) {
         dispatch({
           type: LOAD_BOOKS_SUCCESS,
           payload: books,
-          intent: 'PAGINATE',
+          meta: { paginate: true },
         });
       })
       .catch(error => {

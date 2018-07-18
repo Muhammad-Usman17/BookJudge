@@ -71,7 +71,8 @@ class Search extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { searchResults, books } = state;
+  const searchResults = getOr({}, 'searchResults')(state);
+  const books = getOr({}, 'books')(state);
   return {
     searchResults,
     books,
