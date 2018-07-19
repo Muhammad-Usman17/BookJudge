@@ -5,11 +5,10 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-
 //  src
-import './AutoSuggest.css';
+import './SearchBar.css';
 
-const AutoSuggestInner = props => {
+const SearchBarInner = props => {
   const {
     renderInput,
     books,
@@ -26,8 +25,8 @@ const AutoSuggestInner = props => {
   return (
     <Card>
       <CardMedia image="../../images/Books.jpg" />
-      <CardContent className="AutoSuggest-content">
-        <div className="AutoSuggest-autocomplete">
+      <CardContent className="SearchBar-content">
+        <div className="SearchBar-autocomplete">
           <Autosuggest
             renderInputComponent={renderInput}
             suggestions={books}
@@ -46,7 +45,7 @@ const AutoSuggestInner = props => {
         </div>
 
         <Button
-          className="AutoSuggest-button"
+          className="SearchBar-button"
           variant="outlined"
           color="secondary"
           onClick={onClickSearch}
@@ -58,4 +57,4 @@ const AutoSuggestInner = props => {
   );
 };
 
-export default AutoSuggestInner;
+export default SearchBarInner;

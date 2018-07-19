@@ -7,11 +7,13 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import StarRatings from 'react-star-ratings';
+import { getOr } from 'lodash/fp';
+import { connect } from 'react-redux';
 
 //  src
-import './BookView.css';
+import './BookDetails.css';
 
-const BookViewInner = props => {
+const BookDetails = props => {
   const { book } = props;
 
   if (book) {
@@ -58,4 +60,14 @@ const BookViewInner = props => {
     </div>
   );
 };
-export default BookViewInner;
+function mapStateToProps(state, ownProps) {
+  const { match } = ownProps;
+  const id = getOr(0, 'params.id')(match);
+  const booksData = getOr({}, 'books')(state);
+  const books = getOr({}, 'books')(booksData);
+  const book = books[id];
+  return {
+    book,
+  };
+}
+export default connect(mapStateToProps)(BookDetails);

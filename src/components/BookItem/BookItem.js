@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 // src
 import history from '../../utils/history';
 
-const SearchListItem = props => {
+const BookItem = props => {
   const { book } = props;
   const { id, author, title, image } = book;
   return (
@@ -26,4 +26,4 @@ const SearchListItem = props => {
     </div>
   );
 };
-export default SearchListItem;
+export default BookItem;

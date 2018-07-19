@@ -1,14 +1,13 @@
-.AutoSuggest-div {
-}
-.AutoSuggest-content {
+.SearchBar-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.AutoSuggest-autocomplete {
+.SearchBar-autocomplete {
   width: 70% !important;
 }
-.AutoSuggest-button {
+.SearchBar-button {
   width: 20% !important;
+  max-height: 20px;
 }

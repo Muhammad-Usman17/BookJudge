@@ -1,20 +1,19 @@
 //  src
-import bookApi from '../../api/search';
+import getBooks from '../../api/bookApi';
 
 export const LOAD_BOOKS = 'LOAD_BOOKS';
+export const LOAD_MORE_BOOKS_SUCCESS = 'LOAD_MORE_BOOKS_SUCCESS';
 export const LOAD_BOOKS_SUCCESS = 'LOAD_BOOKS_SUCCESS';
 export const LOAD_BOOKS_FAILURE = 'LOAD_BOOKS_FAILURE';
 
 export function loadBooks(query, page) {
   return dispatch => {
     dispatch({ type: LOAD_BOOKS });
-    return bookApi
-      .getAllBooks(query, page)
+    return getBooks(query, page)
       .then(books => {
         dispatch({
           type: LOAD_BOOKS_SUCCESS,
           payload: books,
-          meta: { paginate: false },
         });
       })
       .catch(error => {
@@ -25,18 +24,16 @@ export function loadBooks(query, page) {
       });
   };
 }
-export function PaginateBooks(query, page) {
+export function loadMoreBooks(query, page) {
   return dispatch => {
     dispatch({
       type: LOAD_BOOKS,
     });
-    bookApi
-      .getAllBooks(query, page)
+    return getBooks(query, page)
       .then(books => {
         dispatch({
-          type: LOAD_BOOKS_SUCCESS,
+          type: LOAD_MORE_BOOKS_SUCCESS,
           payload: books,
-          meta: { paginate: true },
         });
       })
       .catch(error => {

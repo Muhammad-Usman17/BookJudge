@@ -6,7 +6,7 @@ const url = require('url');
 const cors = require('cors');
 
 //  src
-const config = require('./Config.json');
+const config = require('./config.json');
 
 const app = express();
 const router = express.Router();
