@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+
 //  src
 import './SearchBar.css';
 
@@ -48,7 +49,7 @@ const SearchBarInner = props => {
 
         <Button
           className="SearchBar-button"
-          variant="outlined"
+          variant="contained"
           color="secondary"
           onClick={onClickSearch}
         >

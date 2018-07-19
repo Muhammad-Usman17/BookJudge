@@ -9,8 +9,8 @@ export default function searchResults(state = { books: {} }, action) {
       const totalResults = payload[0]['total-results'][0];
       const page = payload[0].page;
       const totalPages = Math.floor(totalResults / (20 + (totalResults % 20 === 0 ? 0 : 1)));
-      state.books = {};
-      const newState = state.books;
+
+      const newState = {};
       const booksArray = payload[0].results[0].work;
       booksArray.forEach(book => {
         const bestBook = book.best_book[0];
@@ -35,7 +35,10 @@ export default function searchResults(state = { books: {} }, action) {
       return nextState;
     }
     case actionTypes.LOAD_MORE_BOOKS_SUCCESS: {
+      const query = payload[0].query[0];
+      const totalResults = payload[0]['total-results'][0];
       const page = payload[0].page;
+      const totalPages = Math.floor(totalResults / (20 + (totalResults % 20 === 0 ? 0 : 1)));
       const newState = state.books;
       const booksArray = payload[0].results[0].work;
       booksArray.forEach(book => {
@@ -51,8 +54,11 @@ export default function searchResults(state = { books: {} }, action) {
       });
       const books = { ...state.books, newState };
       const nextState = {
+        query,
         books,
         page,
+        totalResults,
+        totalPages,
       };
       return nextState;
     }
