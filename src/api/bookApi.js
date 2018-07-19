@@ -1,9 +1,21 @@
 //  lib
 import axios from 'axios';
-import * as xmlParse from 'xml2js';
-//  src
-import * as config from '../config.json';
 
+// server api
+export default function getBooks(query, page) {
+  return axios
+    .get(`http://localhost:4000/api/books?query=${query}&page=${page}`)
+    .then(response => {
+      const books = response.data.book;
+      books[0].page = page;
+      return books;
+    })
+    .catch(error => error);
+}
+
+// import * as xmlParse from 'xml2js';
+// //  src
+// import * as config from '../config.json';
 // export default function getBooks(query, page) {
 //   let source = axios.CancelToken.source();
 //   source.cancel('Canceled previous Request');
@@ -26,14 +38,3 @@ import * as config from '../config.json';
 //     })
 //     .catch(error => error);
 // }
-// server api
-export default function getBooks(query, page) {
-  return axios
-    .get(`http://localhost:4000/api/books?query=${query}&page=${page}`)
-    .then(response => {
-      const books = response.data.book;
-      books[0].page = page;
-      return books;
-    })
-    .catch(error => error);
-}

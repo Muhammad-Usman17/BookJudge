@@ -1,4 +1,4 @@
-//  lib
+//   lib
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -9,7 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import StarRatings from 'react-star-ratings';
 import { getOr } from 'lodash/fp';
 import { connect } from 'react-redux';
-
 //  src
 import './BookDetails.css';
 
