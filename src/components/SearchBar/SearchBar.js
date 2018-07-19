@@ -60,6 +60,16 @@ class SearchBar extends React.Component {
     this.setState(prevState => ({ books: [] }));
   };
 
+  handleOnKeyPress = ev => {
+    if (ev.key === 'Enter') {
+      const { value } = this.state;
+      if (value.length > 0) {
+        history.push(`/search/${value}`);
+      }
+      ev.preventDefault();
+    }
+  };
+
   render() {
     const { value, books } = this.state;
     return (
@@ -75,6 +85,7 @@ class SearchBar extends React.Component {
         getSuggestionValue={this.getSuggestionValue}
         handleChange={this.handleQueryChange}
         value={value}
+        onKeyPress={this.handleOnKeyPress}
       />
     );
   }

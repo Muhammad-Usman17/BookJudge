@@ -21,6 +21,7 @@ const SearchBarInner = props => {
     value,
     handleChange,
     onClickSearch,
+    onKeyPress,
   } = props;
   return (
     <Card>
@@ -40,6 +41,7 @@ const SearchBarInner = props => {
               placeholder: 'Book Name',
               value,
               onChange: handleChange,
+              onKeyPress,
             }}
           />
         </div>
