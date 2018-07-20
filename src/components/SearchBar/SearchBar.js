@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
     };
     this.handleSuggestionsFetchRequested = debounce(
       this.handleSuggestionsFetchRequested.bind(this),
-      500
+      1000
     );
   }
 
@@ -72,6 +72,7 @@ class SearchBar extends React.Component {
 
   render() {
     const { value, books } = this.state;
+    const { isLoading } = this.props;
     return (
       <SearchBarInner
         renderInput={widgets.renderInput}
@@ -86,12 +87,14 @@ class SearchBar extends React.Component {
         handleChange={this.handleQueryChange}
         value={value}
         onKeyPress={this.handleOnKeyPress}
+        isLoading={isLoading}
       />
     );
   }
 }
 function mapStateToProps(state) {
-  const bookData = getOr({}, 'books')(state);
+  const bookData = getOr({}, 'books.mainReducer')(state);
+  const isLoading = getOr({}, 'books.isLoading')(state);
   const totalResults = getOr(0, 'totalResults')(bookData);
   const query = getOr('', 'query')(bookData);
   const books = getOr({}, 'books')(bookData);
@@ -113,6 +116,7 @@ function mapStateToProps(state) {
     books,
     topBooks,
     query,
+    isLoading,
   };
 }
 export default connect(mapStateToProps)(SearchBar);

@@ -3,13 +3,13 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 
 //  src
 import './SearchBar.css';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const SearchBarInner = props => {
   const {
@@ -25,10 +25,11 @@ const SearchBarInner = props => {
     handleChange,
     onClickSearch,
     onKeyPress,
+    isLoading,
   } = props;
   return (
     <Card>
-      <CardMedia image="../../images/Books.jpg" />
+      <ProgressBar isLoading={isLoading} />
       <CardContent className="SearchBar-content">
         <div className="SearchBar-autocomplete">
           <Autosuggest

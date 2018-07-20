@@ -60,7 +60,7 @@ class BookList extends Component {
   }
 }
 function mapStateToProps(state) {
-  const booksData = getOr({}, 'books')(state);
+  const booksData = getOr({}, 'books.mainReducer')(state);
   const books = getOr({}, 'books')(booksData);
   const totalPages = getOr(0, 'totalPages')(booksData);
   const totalResults = getOr(0, 'totalResults')(booksData);

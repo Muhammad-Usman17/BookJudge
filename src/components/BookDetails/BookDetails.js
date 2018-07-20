@@ -63,10 +63,9 @@ const BookDetails = props => {
 function mapStateToProps(state, ownProps) {
   const { match } = ownProps;
   const id = getOr(0, 'params.id')(match);
-  const booksData = getOr({}, 'books')(state);
+  const booksData = getOr({}, 'books.mainReducer')(state);
   const books = getOr({}, 'books')(booksData);
   const book = books[id];
-  console.log(book);
   return {
     book,
   };

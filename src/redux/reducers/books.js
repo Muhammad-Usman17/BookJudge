@@ -1,7 +1,25 @@
+// libs
+import { combineReducers } from 'redux';
+
 //  src
 import * as actionTypes from '../actions';
 
-export default function searchResults(state = { books: {} }, action) {
+const isLoading = (state = false, action) => {
+  switch (action.type) {
+    case actionTypes.LOAD_BOOKS: {
+      return true;
+    }
+    case actionTypes.LOAD_BOOKS_SUCCESS:
+    case actionTypes.LOAD_MORE_BOOKS_SUCCESS:
+    case actionTypes.LOAD_BOOKS_FAILURE: {
+      return false;
+    }
+    default: {
+      return state;
+    }
+  }
+};
+function mainReducer(state = { books: {} }, action) {
   const { type, payload } = action;
   switch (type) {
     case actionTypes.LOAD_BOOKS_SUCCESS: {
@@ -70,3 +88,8 @@ export default function searchResults(state = { books: {} }, action) {
       return state;
   }
 }
+
+export default combineReducers({
+  mainReducer,
+  isLoading,
+});

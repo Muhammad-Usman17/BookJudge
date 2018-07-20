@@ -19,7 +19,7 @@ export const renderInput = inputProps => {
   );
 };
 
-export const renderSuggestion = (suggestion, { query, isHighlighted }) =>
+export const renderSuggestion = suggestion =>
   <ListItem button>
     <Avatar src={suggestion.image} />
     <ListItemText primary={suggestion.title} />
