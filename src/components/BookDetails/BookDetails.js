@@ -7,7 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import StarRatings from 'react-star-ratings';
-import { getOr } from 'lodash/fp';
+import getOr from 'lodash/fp/getOr';
 import { connect } from 'react-redux';
 //  src
 import './BookDetails.css';
@@ -61,11 +61,8 @@ const BookDetails = props => {
   );
 };
 function mapStateToProps(state, ownProps) {
-  const { match } = ownProps;
-  const id = getOr(0, 'params.id')(match);
-  const booksData = getOr({}, 'books.mainReducer')(state);
-  const books = getOr({}, 'books')(booksData);
-  const book = books[id];
+  const id = getOr(0, 'match.params.id')(ownProps);
+  const book = getOr({}, `books.mainReducer.books[${id}]`)(state);
   return {
     book,
   };

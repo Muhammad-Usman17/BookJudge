@@ -1,9 +1,9 @@
 //  lib
-const express = require('express');
+const express = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/express');
 const axios = require('axios');
-const xmlParse = require('xml2js');
+const xmlParse = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/xml2js');
 const url = require('url');
-const cors = require('cors');
+const cors = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/cors');
 
 //  src
 const config = require('./config.json');
@@ -14,26 +14,21 @@ const port = 4000;
 app.use(cors());
 app.use('/api', router);
 
-const getBooks = (query, page) => {
-  try {
-    return axios.get(
-      `${config.baseUrl}search/index.xml?key=${config.apiKey}&q=
+const getBooks = (query, page) =>
+  axios.get(
+    `${config.baseUrl}search/index.xml?key=${config.apiKey}&q=
 				 ${query}&search[field]=title&page=${page}`,
-      {
-        'Access-Control-Allow-Origin': '*',
-      }
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
+    {
+      'Access-Control-Allow-Origin': '*',
+    }
+  );
 
 router.get('/books', async (request, response) => {
   const urlParts = url.parse(request.url, true);
   const parameters = urlParts.query;
   const query = parameters.query;
   const page = parameters.page;
-  const books = getBooks(query, page)
+  getBooks(query, page)
     .then(res => {
       const parseString = xmlParse.parseString;
       let book = res.data;

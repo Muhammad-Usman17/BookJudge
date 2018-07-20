@@ -1,3 +1,4 @@
+// @flow
 //  libs
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -8,7 +9,11 @@ import history from '../../utils/history';
 import { loadBooks, loadMoreBooks } from '../../redux/actions';
 import BookListInner from './BookListInner';
 
-class BookList extends Component {
+type Props = {
+  totalPages: number,
+};
+
+class BookList extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,16 +35,14 @@ class BookList extends Component {
 
   handleLoadMore = () => {
     const { page } = this.state;
-    const { dispatch, match, totalPages } = this.props;
-    const { params } = match;
+    const { dispatch, match: { params }, totalPages } = this.props;
     const query = getOr('', 'query')(params);
     if (page <= totalPages) {
       const pageNo = page + 1;
       dispatch(loadMoreBooks(query, pageNo));
-      this.setState({ page: page + 1 });
-      this.setState({ hasMoreItems: true });
+      this.setState(() => ({ page: pageNo, hasMoreItems: true }));
     } else {
-      this.setState({ hasMoreItems: true });
+      this.setState(() => ({ hasMoreItems: true }));
     }
   };
   handleItemClick = id => {

@@ -1,7 +1,7 @@
 // lib
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import ListItem from '@material-ui/core//ListItem';
+import ListItem from '@material-ui/core/ListItem';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';

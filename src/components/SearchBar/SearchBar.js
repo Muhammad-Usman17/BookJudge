@@ -2,12 +2,16 @@
 import React from 'react';
 import debounce from 'lodash/debounce';
 import { connect } from 'react-redux';
-import { getOr } from 'lodash/fp';
+import flow from 'lodash/fp/flow';
+import getOr from 'lodash/fp/getOr';
+import orderBy from 'lodash/fp/orderBy';
+import slice from 'lodash/fp/slice';
+
 //  src
 import { loadBooks } from '../../redux/actions';
 import SearchBarInner from './SearchBarInner';
 import history from '../../utils/history';
-import * as widgets from '../Widgets';
+import * as widgets from './widgets';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -22,10 +26,6 @@ class SearchBar extends React.Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(prevState => ({ books: nextProps.topBooks }));
-  }
-
   getSuggestionValue = suggestions => suggestions.name;
 
   onSuggestionSelected = (event, { suggestion }) => {
@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
   };
 
   handleQueryChange = (event, { newValue }) => {
-    this.setState(prevState => ({ value: newValue }));
+    this.setState(() => ({ value: newValue }));
   };
 
   handleSearchButton = event => {
@@ -56,10 +56,6 @@ class SearchBar extends React.Component {
     }
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState(prevState => ({ books: [] }));
-  };
-
   handleOnKeyPress = ev => {
     if (ev.key === 'Enter') {
       const { value } = this.state;
@@ -71,15 +67,14 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const { value, books } = this.state;
-    const { isLoading } = this.props;
+    const { value } = this.state;
+    const { isLoading, topBooks } = this.props;
     return (
       <SearchBarInner
         renderInput={widgets.renderInput}
-        books={books}
+        books={topBooks}
         onClickSearch={this.handleSearchButton}
         handleSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        handleSuggestionsClearRequested={this.handleSuggestionsClearRequested}
         renderSuggestionsContainer={widgets.renderSuggestionsContainer}
         onSuggestionSelected={this.onSuggestionSelected}
         renderSuggestion={widgets.renderSuggestion}
@@ -95,25 +90,24 @@ class SearchBar extends React.Component {
 function mapStateToProps(state) {
   const bookData = getOr({}, 'books.mainReducer')(state);
   const isLoading = getOr({}, 'books.isLoading')(state);
-  const totalResults = getOr(0, 'totalResults')(bookData);
+  const totalResults = getOr(5, 'totalResults')(bookData);
   const query = getOr('', 'query')(bookData);
-  const books = getOr({}, 'books')(bookData);
-  const bestBooks = Object.keys(books).map(key => books[key]);
-  let topBooks = [];
-  bestBooks.sort((obj1, obj2) => obj2.averageRating - obj1.averageRating);
-  if (bestBooks.length > 0) {
-    topBooks = bestBooks.filter((i, index) => index < 5).map(book => book);
-    if (bestBooks.length > 5) {
-      topBooks.push({
+  const topBooks = flow(
+    getOr({}, 'books'),
+    orderBy('averageRating', 'desc'),
+    slice(0, 5),
+    bestBooks => [
+      ...bestBooks,
+      {
         title: `${parseInt(totalResults, 10) - 5} Other Results`,
         code: 'search',
         author: query,
         image: '',
-      });
-    }
-  }
+      },
+    ]
+  )(bookData);
+
   return {
-    books,
     topBooks,
     query,
     isLoading,

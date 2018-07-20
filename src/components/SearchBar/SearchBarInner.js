@@ -16,7 +16,6 @@ const SearchBarInner = props => {
     renderInput,
     books,
     handleSuggestionsFetchRequested,
-    handleSuggestionsClearRequested,
     renderSuggestionsContainer,
     onSuggestionSelected,
     renderSuggestion,
@@ -39,7 +38,6 @@ const SearchBarInner = props => {
             renderInputComponent={renderInput}
             suggestions={books}
             onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
-            onSuggestionsClearRequested={handleSuggestionsClearRequested}
             renderSuggestionsContainer={renderSuggestionsContainer}
             onSuggestionSelected={onSuggestionSelected}
             renderSuggestion={renderSuggestion}
