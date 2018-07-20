@@ -3,6 +3,8 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import ListItem from '@material-ui/core//ListItem';
 import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export const renderInput = inputProps => {
   const { ref, ...other } = inputProps;
@@ -19,7 +21,8 @@ export const renderInput = inputProps => {
 
 export const renderSuggestion = (suggestion, { query, isHighlighted }) =>
   <ListItem button>
-    {suggestion.title}
+    <Avatar src={suggestion.image} />
+    <ListItemText primary={suggestion.title} />
   </ListItem>;
 
 export const renderSuggestionsContainer = options => {

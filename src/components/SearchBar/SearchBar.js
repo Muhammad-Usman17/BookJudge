@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
     };
     this.handleSuggestionsFetchRequested = debounce(
       this.handleSuggestionsFetchRequested.bind(this),
-      1000
+      500
     );
   }
 

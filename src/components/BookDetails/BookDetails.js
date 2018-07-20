@@ -14,9 +14,10 @@ import './BookDetails.css';
 
 const BookDetails = props => {
   const { book } = props;
-
   if (book) {
-    const { title, author, image, averageRating, ratingCount } = book;
+    const { title, author, averageRating, image, ratingCount } = book;
+    const Rating = isNaN(averageRating) ? 0 : averageRating;
+
     return title
       ? <div className="Book-div">
           <Card className="Book-card">
@@ -35,7 +36,7 @@ const BookDetails = props => {
               <Typography component="p">
                 Average Rating :
                 <StarRatings
-                  rating={averageRating}
+                  rating={Rating}
                   starDimension="25px"
                   starSpacing="0"
                   starRatedColor="blue"
@@ -65,6 +66,7 @@ function mapStateToProps(state, ownProps) {
   const booksData = getOr({}, 'books')(state);
   const books = getOr({}, 'books')(booksData);
   const book = books[id];
+  console.log(book);
   return {
     book,
   };

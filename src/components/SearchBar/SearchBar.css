@@ -11,3 +11,8 @@
   width: 20% !important;
   max-height: 20px;
 }
+.Widgets-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

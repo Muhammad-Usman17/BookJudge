@@ -34,10 +34,12 @@ class BookList extends Component {
     const { params } = match;
     const query = getOr('', 'query')(params);
     if (page <= totalPages) {
-      this.setState({ hasMoreItems: true });
       const pageNo = page + 1;
       dispatch(loadMoreBooks(query, pageNo));
       this.setState({ page: page + 1 });
+      this.setState({ hasMoreItems: true });
+    } else {
+      this.setState({ hasMoreItems: true });
     }
   };
   handleItemClick = id => {

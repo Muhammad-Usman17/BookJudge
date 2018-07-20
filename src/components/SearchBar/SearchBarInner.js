@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import Tooltip from '@material-ui/core/Tooltip';
+import PropTypes from 'prop-types';
 
 //  src
 import './SearchBar.css';
@@ -30,6 +32,9 @@ const SearchBarInner = props => {
       <CardContent className="SearchBar-content">
         <div className="SearchBar-autocomplete">
           <Autosuggest
+            theme={{
+              suggestionsList: 'Widgets-list',
+            }}
             renderInputComponent={renderInput}
             suggestions={books}
             onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
@@ -46,18 +51,33 @@ const SearchBarInner = props => {
             }}
           />
         </div>
-
-        <Button
-          className="SearchBar-button"
-          variant="contained"
-          color="secondary"
-          onClick={onClickSearch}
-        >
-          {' '}Search{' '}
-        </Button>
+        <Tooltip title="Search">
+          <Button
+            className="SearchBar-button"
+            variant="contained"
+            color="secondary"
+            onClick={onClickSearch}
+          >
+            {' '}Search{' '}
+          </Button>
+        </Tooltip>
       </CardContent>
     </Card>
   );
+};
+SearchBarInner.propTypes = {
+  renderInput: PropTypes.func.isRequired,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSuggestionsFetchRequested: PropTypes.func.isRequired,
+  handleSuggestionsClearRequested: PropTypes.func.isRequired,
+  renderSuggestionsContainer: PropTypes.func.isRequired,
+  onSuggestionSelected: PropTypes.func.isRequired,
+  renderSuggestion: PropTypes.func.isRequired,
+  getSuggestionValue: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  onClickSearch: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
 };
 
 export default SearchBarInner;
