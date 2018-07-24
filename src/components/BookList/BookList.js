@@ -11,6 +11,10 @@ import BookListInner from './BookListInner';
 
 type Props = {
   totalPages: number,
+  match: string,
+  dispatch: Function,
+  books: Object,
+  totalResults: Number,
 };
 
 class BookList extends Component<Props> {

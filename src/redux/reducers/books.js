@@ -10,6 +10,7 @@ const parser = booksArray =>
   reduce((final, book) => {
     const bestBook = getOr({}, 'best_book[0]')(book);
     const avgRating = getOr(0.0, 'average_rating[0]')(book);
+    const rating = isNaN(avgRating) ? 0.0 : avgRating;
     const ratingCount = getOr(0, 'ratings_count[0]._')(book);
     const id = getOr(0, 'id[0]._')(bestBook);
     return {
@@ -19,7 +20,7 @@ const parser = booksArray =>
         title: bestBook.title[0],
         author: bestBook.author[0].name[0],
         image: bestBook.image_url[0],
-        averageRating: parseFloat(avgRating),
+        averageRating: parseFloat(rating),
         ratingCount,
       },
     };

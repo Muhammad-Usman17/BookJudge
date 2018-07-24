@@ -13,7 +13,13 @@ import SearchBarInner from './SearchBarInner';
 import history from '../../utils/history';
 import * as widgets from './widgets';
 
-class SearchBar extends React.Component {
+type Props = {
+  query: String,
+  dispatch: Function,
+  isLoading: Boolean,
+  topBooks: Array,
+};
+class SearchBar extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +47,7 @@ class SearchBar extends React.Component {
     this.setState(() => ({ value: newValue }));
   };
 
-  handleSearchButton = event => {
+  handleSearchButton = () => {
     const { value } = this.state;
     if (value.length > 0) {
       history.push(`/search/${value}`);

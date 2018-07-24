@@ -68,7 +68,6 @@ SearchBarInner.propTypes = {
   renderInput: PropTypes.func.isRequired,
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSuggestionsFetchRequested: PropTypes.func.isRequired,
-  handleSuggestionsClearRequested: PropTypes.func.isRequired,
   renderSuggestionsContainer: PropTypes.func.isRequired,
   onSuggestionSelected: PropTypes.func.isRequired,
   renderSuggestion: PropTypes.func.isRequired,
@@ -77,6 +76,7 @@ SearchBarInner.propTypes = {
   handleChange: PropTypes.func.isRequired,
   onClickSearch: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default SearchBarInner;

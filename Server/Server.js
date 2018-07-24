@@ -1,9 +1,9 @@
 //  lib
-const express = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/express');
+const express = require('express');
 const axios = require('axios');
-const xmlParse = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/xml2js');
+const xmlParse = require('xml2js');
 const url = require('url');
-const cors = require('../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/cors');
+const cors = require('cors');
 
 //  src
 const config = require('./config.json');
